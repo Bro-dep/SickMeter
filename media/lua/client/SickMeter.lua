@@ -14,17 +14,18 @@ require("MF_ISMoodle")
 Character = nil
 PreviousFoodSicknessLevel = -1
 PreviousColdSicknessLevel = -1
-Sickhealing = false
+SickHealing = false
 MoodleOnValue = 1
-MoodleOffValue = 0.5
+MoodleOffValue = 0
 MoodleId = "healing"
 
 MF.createMoodle(MoodleId)
 
 function UpdateMoodle()
+    local value
     MoodleActive = SandboxVars.BetterSickness.Moodle
-    if Sickhealing then
-        value = MoodleOnValue
+    if SickHealing then
+        value= MoodleOnValue
     else
         value = MoodleOffValue
     end
@@ -58,9 +59,9 @@ function HealSickness(player)
             local newColdSicknessLevel = coldSicknessLevel - (coldSicknessLevel * recoveryRate)
             bodyDamage:setFoodSicknessLevel(newFoodSicknessLevel)
             bodyDamage:setColdSicknessLevel(newColdSicknessLevel)
-            Sickhealing = true
+            SickHealing = true
         else
-            Sickhealing = false
+            SickHealing = false
         end
     end
 end
@@ -75,7 +76,7 @@ end
 local function OnPlayerUpdate(player)
     HealSickness(player)
 end
-
+--[[
 local function OnKeyPressed(key)
     --print(key)
     --bodyStat = getPlayer.getStats()
@@ -90,8 +91,8 @@ local function OnKeyPressed(key)
         print("I DID SOMETHING2")
     end
 end
-
+]]
 --[Events]--
 Events.OnCreatePlayer.Add(OnCreatePlayer)
 Events.OnPlayerUpdate.Add(OnPlayerUpdate)
-Events.OnKeyPressed.Add(OnKeyPressed)
+--Events.OnKeyPressed.Add(OnKeyPressed)

@@ -87,7 +87,7 @@ end
 local function OnCreatePlayer(playerIndex, player)
     if (playerIndex == 0) then
         Character = player
-        print("Player created")
+        --print("Player created")
     end
 end
 

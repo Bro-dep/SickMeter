@@ -3,6 +3,7 @@
         "SandboxVars",
         "MF",
         "player",
-        "Events"
+        "Events",
+        "require"
     ]
 }

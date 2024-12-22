@@ -98,4 +98,3 @@ end
 --[Events]--
 Events.OnCreatePlayer.Add(OnCreatePlayer)
 Events.OnPlayerUpdate.Add(OnPlayerUpdate)
---Events.OnKeyPressed.Add(OnKeyPressed)

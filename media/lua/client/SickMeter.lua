@@ -35,12 +35,12 @@ function HealSickness(player)
     --#region Variables
     local bodyDamage = player:getBodyDamage()
     local playerStats = player:getStats()
-    local foodSicknessLevel = playerStats:getFoodSicknessLevel()
-    local coldSicknessLevel = playerStats:getColdStrength()
+    local foodSicknessLevel = bodyDamage:getFoodSicknessLevel()
+    local coldSicknessLevel = bodyDamage:getColdStrength()
     local hunger = playerStats:getHunger()
     local thirst = playerStats:getThirst()
     local endurance = playerStats:getEndurance()
-    local recoveryRate = 1 * ((SandboxVars.BetterSickness.RecoveryRate) / 100)
+    local recoveryRate = .001 * ((SandboxVars.BetterSickness.RecoveryRate) / 100)
     --#endregion
     -- Get initial value
     if PreviousFoodSicknessLevel < 0.0 then
@@ -52,6 +52,7 @@ function HealSickness(player)
     -- Healing
     local currentSickness = bodyDamage:getFoodSicknessLevel() + bodyDamage:getColdStrength()
     if currentSickness > 0 then
+        print("Current Sickness: " .. string(currentSickness)
         --If hunger, thirst, and endurance are high enough, heal sickness
         if hunger < 0.05 and thirst < 0.05 and endurance > 0.90 then
             local newFoodSicknessLevel = foodSicknessLevel - (foodSicknessLevel * recoveryRate)
@@ -59,7 +60,11 @@ function HealSickness(player)
             bodyDamage:setFoodSicknessLevel(newFoodSicknessLevel)
             bodyDamage:setColdStrength(newColdSicknessLevel)
             UpdateMoodle(true)
-        else
+            print("Healing")
+           
+                
+        elseif currentSickness < 0.05 then
+            print("Not Healing")
             UpdateMoodle(false)
         end
     end

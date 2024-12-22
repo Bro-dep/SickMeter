@@ -1,6 +1,4 @@
-name=Sick Meter 0.0.1
-poster=poster.png
-require=
+name=Sick Meter
 id=SickMeter
-versionMin=41.73
+poster=poster.png
 description=I got tired of getting sick and dying in minutes so wanted a mod that made it more clear about what to do when you get sick.

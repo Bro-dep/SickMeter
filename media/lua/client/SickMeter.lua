@@ -9,6 +9,8 @@ Date modified: 12/21/2024
 ========================================================
 ]] --
 
+Character = nil
+
 local function MeterUpdate(character)
     --[Variables]--
     --[Damage taken]--
@@ -33,22 +35,31 @@ end
 
 local function OnCreatePlayer(playerIndex, player)
     if (playerIndex == 0) then
-        Testing(player)
+        Character = player
+        print("Player created")
     end
 end
 
 local function OnPlayerUpdate(player)
-    Testing(player)
-    
+    print("Player Update")
 end
 
 local function OnKeyPressed(key)
+    --print(key)
+    --bodyStat = getPlayer.getStats()
     if key == KEY_F1 then
-        print("F1 Pressed")
+        player:Say("F1")
+    end
+    if key == 2 then
+        print("I DID SOMETHING")
+        --bodyStat:setThirst(bodyStat:getThirst() + 1)
+    end
+    if key == KEY_2 then
+        print("I DID SOMETHING2")
     end
 end
 
 --[Events]--
---Events.OnCreatePlayer.Add(OnCreatePlayer)
---Events.OnPlayerUpdate.Add(OnPlayerUpdate)
+Events.OnCreatePlayer.Add(OnCreatePlayer)
+Events.OnPlayerUpdate.Add(OnPlayerUpdate)
 Events.OnKeyPressed.Add(OnKeyPressed)

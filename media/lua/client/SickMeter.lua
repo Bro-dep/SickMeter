@@ -9,9 +9,18 @@ Date modified: 12/21/2024
 ========================================================
 ]] --
 
+require("MF_ISMoodle")
+
 Character = nil
 PreviousFoodSicknessLevel = -1
 PreviousColdSicknessLevel = -1
+MoodleId = "healing"
+
+MD.createMoodle(MoodleId)
+
+function UpdateMoodle()
+    MoodleActive = SandboxVars.BetterSickness.Moodle
+end
 
 function HealSickness(player)
     --#region Variables
@@ -40,7 +49,7 @@ function HealSickness(player)
             local newColdSicknessLevel = coldSicknessLevel - (coldSicknessLevel * recoveryRate)
             bodyDamage:setFoodSicknessLevel(newFoodSicknessLevel)
             bodyDamage:setColdSicknessLevel(newColdSicknessLevel)
-            
+
         end
     end
 

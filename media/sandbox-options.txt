@@ -8,3 +8,10 @@ option BetterSickness.RecoveryRate
     page = BetterSickness,
     translation = BetterSicknessRecoveryRate,
 }
+option BetterSickness.Moodle
+{
+    type = boolean,
+    default = true,
+    page = BetterSickness,
+    translation = BetterSicknessMoodle,
+}

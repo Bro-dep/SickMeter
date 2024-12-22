@@ -14,14 +14,13 @@ require("MF_ISMoodle")
 Character = nil
 PreviousFoodSicknessLevel = -1
 PreviousColdSicknessLevel = -1
-SickHealing = false
 MoodleOnValue = 1
 MoodleOffValue = 0
 MoodleId = "healing"
 
 MF.createMoodle(MoodleId)
 
-function UpdateMoodle()
+function UpdateMoodle(SickHealing)
     local value
     MoodleActive = SandboxVars.BetterSickness.Moodle
     if SickHealing then
@@ -37,7 +36,7 @@ function HealSickness(player)
     local bodyDamage = player:getBodyDamage()
     local playerStats = player:getStats()
     local foodSicknessLevel = playerStats:getFoodSicknessLevel()
-    local coldSicknessLevel = playerStats:getColdSicknessLevel()
+    local coldSicknessLevel = playerStats:getColdStrength()
     local hunger = playerStats:getHunger()
     local thirst = playerStats:getThirst()
     local endurance = playerStats:getEndurance()
@@ -48,20 +47,20 @@ function HealSickness(player)
         PreviousFoodSicknessLevel = bodyDamage:getFoodSicknessLevel()
     end
     if PreviousColdSicknessLevel < 0.0 then
-        PreviousColdSicknessLevel = bodyDamage:getColdSicknessLevel()
+        PreviousColdSicknessLevel = bodyDamage:getColdStrength()
     end
     -- Healing
-    local currentSickness = bodyDamage:getFoodSicknessLevel() + bodyDamage:getColdSicknessLevel()
+    local currentSickness = bodyDamage:getFoodSicknessLevel() + bodyDamage:getColdStrength()
     if currentSickness > 0 then
         --If hunger, thirst, and endurance are high enough, heal sickness
         if hunger < 0.05 and thirst < 0.05 and endurance > 0.90 then
             local newFoodSicknessLevel = foodSicknessLevel - (foodSicknessLevel * recoveryRate)
             local newColdSicknessLevel = coldSicknessLevel - (coldSicknessLevel * recoveryRate)
             bodyDamage:setFoodSicknessLevel(newFoodSicknessLevel)
-            bodyDamage:setColdSicknessLevel(newColdSicknessLevel)
-            SickHealing = true
+            bodyDamage:setColdStrength(newColdSicknessLevel)
+            UpdateMoodle(true)
         else
-            SickHealing = false
+            UpdateMoodle(false)
         end
     end
 end

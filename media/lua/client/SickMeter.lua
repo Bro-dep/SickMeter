@@ -14,8 +14,8 @@ require("MF_ISMoodle")
 Character = nil
 PreviousFoodSicknessLevel = -1
 PreviousColdSicknessLevel = -1
-MoodleOnValue = 1
-MoodleOffValue = 0
+MoodleOnValue = .6
+MoodleOffValue = .5
 MoodleId = "healing"
 
 MF.createMoodle(MoodleId)
@@ -52,20 +52,34 @@ function HealSickness(player)
     -- Healing
     local currentSickness = bodyDamage:getFoodSicknessLevel() + bodyDamage:getColdStrength()
     if currentSickness > 0 then
-        print("Current Sickness: " .. string(currentSickness)
-        --If hunger, thirst, and endurance are high enough, heal sickness
-        if hunger < 0.05 and thirst < 0.05 and endurance > 0.90 then
-            local newFoodSicknessLevel = foodSicknessLevel - (foodSicknessLevel * recoveryRate)
-            local newColdSicknessLevel = coldSicknessLevel - (coldSicknessLevel * recoveryRate)
-            bodyDamage:setFoodSicknessLevel(newFoodSicknessLevel)
-            bodyDamage:setColdStrength(newColdSicknessLevel)
-            UpdateMoodle(true)
-            print("Healing")
-           
-                
-        elseif currentSickness < 0.05 then
-            print("Not Healing")
-            UpdateMoodle(false)
+        if currentSickness > 25 then
+            --print("Current Sickness: " .. tostring(currentSickness))
+            --If hunger, thirst, and endurance are high enough, heal sickness
+            if hunger < 0.05 and thirst < 0.05 and endurance > 0.90 then
+                --print("coldSicknessLevel: " .. tostring(coldSicknessLevel))
+                local newFoodSicknessLevel = foodSicknessLevel - (foodSicknessLevel * recoveryRate)
+                local newColdSicknessLevel = coldSicknessLevel - ((coldSicknessLevel * recoveryRate) * 3)
+                --print("NewColdSicknessLevel: " .. tostring(newColdSicknessLevel))
+                bodyDamage:setFoodSicknessLevel(newFoodSicknessLevel)
+                bodyDamage:setColdStrength(newColdSicknessLevel)
+                --Drain stats
+                playerStats:setHunger(playerStats:getHunger() + 0.00005)
+                playerStats:setThirst(playerStats:getThirst() + 0.00005)
+                UpdateMoodle(true)
+                --print("Healing")
+            else
+                UpdateMoodle(false)
+            end
+        elseif currentSickness < 25 then
+            if hunger < 0.05 and thirst < 0.05 and endurance > 0.90 then
+                local newFoodSicknessLevel = foodSicknessLevel - (foodSicknessLevel * recoveryRate)
+                local newColdSicknessLevel = coldSicknessLevel - ((coldSicknessLevel * recoveryRate) * 3)
+                bodyDamage:setFoodSicknessLevel(newFoodSicknessLevel)
+                bodyDamage:setColdStrength(newColdSicknessLevel)
+                UpdateMoodle(false)
+            else
+                UpdateMoodle(false)
+            end
         end
     end
 end
@@ -80,22 +94,7 @@ end
 local function OnPlayerUpdate(player)
     HealSickness(player)
 end
---[[
-local function OnKeyPressed(key)
-    --print(key)
-    --bodyStat = getPlayer.getStats()
-    if key == KEY_F1 then
-        player:Say("F1")
-    end
-    if key == 2 then
-        print("I DID SOMETHING")
-        --bodyStat:setThirst(bodyStat:getThirst() + 1)
-    end
-    if key == KEY_2 then
-        print("I DID SOMETHING2")
-    end
-end
-]]
+
 --[Events]--
 Events.OnCreatePlayer.Add(OnCreatePlayer)
 Events.OnPlayerUpdate.Add(OnPlayerUpdate)

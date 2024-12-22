@@ -1,4 +1,5 @@
 Moodles_EN {
-    Moodles_SickHealing_Good_lvl14 = "Recovering from Sickness",
-    Moodles_SickHealing_Good_desc_lvl14 = "Getting over a sickness.",
+    Moodles_healing_Good_lvl1 = "Recovering from Sickness",
+    Moodles_healing_Good_desc_lvl1 = "Getting over a sickness.(Full stats help you recover)",
+
 }

@@ -10,27 +10,37 @@ Date modified: 12/21/2024
 ]] --
 
 Character = nil
+PreviousFoodSicknessLevel = -1
+PreviousColdSicknessLevel = -1
 
-local function MeterUpdate(character)
-    --[Variables]--
-    --[Damage taken]--
-    local bodyDamage = character:getBodyDamage()
-    --[Stats such as food,thirst etc]--
-    local playerStats = character:getStats()
+function HealSickness(player)
+    --#region Variables
+    local bodyDamage = player:getBodyDamage()
+    local playerStats = player:getStats()
+    local foodSicknessLevel = playerStats:getFoodSicknessLevel()
+    local coldSicknessLevel = playerStats:getColdSicknessLevel()
+    local hunger = playerStats:getHunger()
+    local thirst = playerStats:getThirst()
+    local endurance = playerStats:getEndurance()
+    local recoveryRate = SandboxVars.BetterSickness.RecoveryRate
+    --#endregion
+    if PreviousFoodSicknessLevel < 0.0 then
+        PreviousFoodSicknessLevel = bodyDamage:getFoodSicknessLevel()
+    end
+    if PreviousColdSicknessLevel < 0.0 then
+        PreviousColdSicknessLevel = bodyDamage:getColdSicknessLevel()
+    end
 
-
-
-end
-
-local function CheckMood(character)
+    --#region Healing
+    if foodSicknessLevel > 0 then
+        bodyDamage:setFoodSicknessLevel(foodSicknessLevel - recoveryRate)
+    end
+    --#endregion
+    end
     
-end
+    
 
-local function Testing(character)
-    local bodyDamage = character:getBodyDamage()
-    local playerStats = character:getStats()
-    print(bodyDamage)
-    print(playerStats)
+
 end
 
 local function OnCreatePlayer(playerIndex, player)
@@ -41,7 +51,7 @@ local function OnCreatePlayer(playerIndex, player)
 end
 
 local function OnPlayerUpdate(player)
-    print("Player Update")
+    HealSickness(player)
 end
 
 local function OnKeyPressed(key)

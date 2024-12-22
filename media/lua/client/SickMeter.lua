@@ -24,11 +24,21 @@ function HealSickness(player)
     local endurance = playerStats:getEndurance()
     local recoveryRate = SandboxVars.BetterSickness.RecoveryRate
     --#endregion
+    -- Get initial value
     if PreviousFoodSicknessLevel < 0.0 then
         PreviousFoodSicknessLevel = bodyDamage:getFoodSicknessLevel()
     end
     if PreviousColdSicknessLevel < 0.0 then
         PreviousColdSicknessLevel = bodyDamage:getColdSicknessLevel()
+    end
+    -- Healing
+    local currentSickness = bodyDamage:getFoodSicknessLevel() + bodyDamage:getColdSicknessLevel()
+    if currentSickness > 0 then
+        local newSickness = currentSickness
+
+        if newSickness < 0 then
+            newSickness = 0
+        end
     end
 
     --#region Healing

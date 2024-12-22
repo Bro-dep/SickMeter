@@ -14,12 +14,21 @@ require("MF_ISMoodle")
 Character = nil
 PreviousFoodSicknessLevel = -1
 PreviousColdSicknessLevel = -1
+Sickhealing = false
+MoodleOnValue = 1
+MoodleOffValue = 0.5
 MoodleId = "healing"
 
-MD.createMoodle(MoodleId)
+MF.createMoodle(MoodleId)
 
 function UpdateMoodle()
     MoodleActive = SandboxVars.BetterSickness.Moodle
+    if Sickhealing then
+        value = MoodleOnValue
+    else
+        value = MoodleOffValue
+    end
+    MF.getMoodle(MoodleId):setValue(value)
 end
 
 function HealSickness(player)
@@ -49,20 +58,11 @@ function HealSickness(player)
             local newColdSicknessLevel = coldSicknessLevel - (coldSicknessLevel * recoveryRate)
             bodyDamage:setFoodSicknessLevel(newFoodSicknessLevel)
             bodyDamage:setColdSicknessLevel(newColdSicknessLevel)
-
+            Sickhealing = true
+        else
+            Sickhealing = false
         end
     end
-
-    --#region Healing
-    if foodSicknessLevel > 0 then
-        bodyDamage:setFoodSicknessLevel(foodSicknessLevel - recoveryRate)
-    end
-    --#endregion
-    end
-    
-    
-
-
 end
 
 local function OnCreatePlayer(playerIndex, player)

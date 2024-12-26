@@ -3,9 +3,9 @@
 Made by Luna 
 Im no expert in lua but i wanted this so i made it.
 ========================================================
-Version: 0.0.1
+Version: 0.0.2
 Date made: 12/21/2024
-Date modified: 12/21/2024
+Date modified: 12/26/2024
 ========================================================
 ]] --
 
@@ -55,7 +55,7 @@ function HealSickness(player)
         if currentSickness > 25 then
             --print("Current Sickness: " .. tostring(currentSickness))
             --If hunger, thirst, and endurance are high enough, heal sickness
-            if hunger < 0.05 and thirst < 0.05 and endurance > 0.90 then
+            if hunger < 0.10 and thirst < 0.10 and endurance > 0.90 then
                 --print("coldSicknessLevel: " .. tostring(coldSicknessLevel))
                 local newFoodSicknessLevel = foodSicknessLevel - (foodSicknessLevel * recoveryRate)
                 local newColdSicknessLevel = coldSicknessLevel - ((coldSicknessLevel * recoveryRate) * 3)

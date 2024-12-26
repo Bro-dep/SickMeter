@@ -1,0 +1,9 @@
+Sandbox_EN = {
+   Sandbox_BetterSickness = "Better Sickness",
+   
+   Sandbox_BetterSicknessRecoveryRate = "Recovery Rate",
+   Sandbox_BetterSicknessRecoveryRate_tooltip = "How effective the recovery will be minimum 1%, maximum 100%",
+
+   Sandbox_BetterSicknessMoodle = "Moodle",
+   Sandbox_BetterSicknessMoodle_tooltip = "Toggle off to disable the moodle",
+}

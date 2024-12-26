@@ -40,7 +40,7 @@ function HealSickness(player)
     local hunger = playerStats:getHunger()
     local thirst = playerStats:getThirst()
     local endurance = playerStats:getEndurance()
-    local recoveryRate = .001 * ((SandboxVars.BetterSickness.RecoveryRate) / 100)
+    local recoveryRate = .0005 * ((SandboxVars.BetterSickness.RecoveryRate) / 100)
     --#endregion
     -- Get initial value
     if PreviousFoodSicknessLevel < 0.0 then

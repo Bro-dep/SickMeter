@@ -1,0 +1,5 @@
+name=Better Sickness
+id=BetterSickness
+poster=poster.png
+require=MoodleFramework
+description=I got tired of getting sick. This makes healing sickness a bit more predictable with a moodle saying your doing it right. v0.0.2

@@ -55,7 +55,7 @@ function HealSickness(player)
         if currentSickness > 25 then
             --print("Current Sickness: " .. tostring(currentSickness))
             --If hunger, thirst, and endurance are high enough, heal sickness
-            if hunger < 0.05 and thirst < 0.05 and endurance > 0.90 then
+            if hunger < 0.10 and thirst < 0.10 and endurance > 0.90 then
                 --print("coldSicknessLevel: " .. tostring(coldSicknessLevel))
                 local newFoodSicknessLevel = foodSicknessLevel - (foodSicknessLevel * recoveryRate)
                 local newColdSicknessLevel = coldSicknessLevel - ((coldSicknessLevel * recoveryRate) * 3)

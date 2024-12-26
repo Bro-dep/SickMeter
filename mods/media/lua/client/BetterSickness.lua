@@ -71,7 +71,7 @@ function HealSickness(player)
                 UpdateMoodle(false)
             end
         elseif currentSickness < 25 then
-            if hunger < 0.05 and thirst < 0.05 and endurance > 0.90 then
+            if hunger < 0.10 and thirst < 0.10 and endurance > 0.90 then
                 local newFoodSicknessLevel = foodSicknessLevel - (foodSicknessLevel * recoveryRate)
                 local newColdSicknessLevel = coldSicknessLevel - ((coldSicknessLevel * recoveryRate) * 3)
                 bodyDamage:setFoodSicknessLevel(newFoodSicknessLevel)

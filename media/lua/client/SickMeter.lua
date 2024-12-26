@@ -3,9 +3,9 @@
 Made by Luna 
 Im no expert in lua but i wanted this so i made it.
 ========================================================
-Version: 0.0.1
+Version: 0.0.2
 Date made: 12/21/2024
-Date modified: 12/21/2024
+Date modified: 12/26/2024
 ========================================================
 ]] --
 
